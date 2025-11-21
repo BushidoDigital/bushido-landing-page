@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* Bushido.digital — Pop‑art palette */
+:root {
+  --neo-cyan: #10c8ff;
+  --neo-lime: #c7ff2e;
+  --neo-magenta: #ff0bd2;
+  --neo-orange: #ff8e00;
+  --neo-purple: #8b5cf6; /* vibrant violet */
+  --neo-ink: #05060b; /* deep blackish */
+  --paper: #fa00; /* just a placeholder to keep order */
+}
+
+html, body, #__nuxt { height: 100%; }
+body {
+  color: #000;
+  background: var(--neo-cyan);
+  font-family: "Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* App-level guard: prevent horizontal scroll from decorative shapes
+   while allowing section-level overflow-visible for shadows/tails. */
+.no-hscroll { overflow-x: clip; }
+@supports not (overflow: clip) {
+  .no-hscroll { overflow-x: hidden; }
+}
+
+/* Comic display headline */
+.comic {
+  font-family: "Bangers", ui-sans-serif, system-ui;
+  letter-spacing: 0.5px;
+}
+
+/* Big halftone dot background utility */
+.halftone {
+  --dot: rgba(0,0,0,0.25);
+  background-image:
+    radial-gradient(var(--dot) 1.5px, transparent 2px);
+  background-size: 12px 12px;
+}
+
+/* Speech bubble like the reference */
+.speech {
+  background: #fff;
+  color: #000;
+  border: 6px solid #000;
+  border-radius: 22px;
+  padding: 14px 20px;
+  box-shadow: 6px 6px 0 #000;
+  position: relative;
+}
+.speech:after {
+  content: "";
+  position: absolute;
+  left: 36px;
+  bottom: -22px;
+  width: 0; height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 22px solid #000;
+}
+.speech:before {
+  content: "";
+  position: absolute;
+  left: 36px;
+  bottom: -16px;
+  width: 0; height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 16px solid #fff;
+  z-index: 1;
+}
+
+/* Pop cards */
+.pop-card {
+  background: var(--neo-lime);
+  color: #000;
+  border: 6px solid #000;
+  box-shadow: 8px 8px 0 #000;
+}
+
+/* Hover animations for "What we build" cards (ServiceCard.vue) */
+.service-card {
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.service-card:hover {
+  transform: translate(-3px, -3px) rotate(-0.3deg);
+  box-shadow: 12px 12px 0 #000;
+}
+.service-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 #000;
+}
+
+/* Pop button */
+.pop-btn {
+  background: var(--neo-magenta);
+  color: #000;
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  transition: transform .05s ease, box-shadow .05s ease;
+}
+.pop-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #000; }
+.pop-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+
+/* Accent helpers */
+.bg-neo-cyan { background-color: var(--neo-cyan); }
+.bg-neo-lime { background-color: var(--neo-lime); }
+.bg-neo-magenta { background-color: var(--neo-magenta); }
+.bg-neo-orange { background-color: var(--neo-orange); }
+.bg-neo-purple { background-color: var(--neo-purple); }
+.ink { color: #000; }
+
+/* Accessibility: focus ring */
+:where(a,button,[role="button"]) {
+  outline-offset: 3px;
+}
+
+/* Layout helpers */
+.container { max-width: 1120px; margin-inline: auto; padding-inline: 16px; }
+
+/* ------------------------------
+   Hero speech bubble animations
+   ------------------------------ */
+@keyframes bubble-pop-in {
+  0% { transform: translateZ(0) scale(0.96) rotate(-1deg); opacity: 0; }
+  60% { transform: translateZ(0) scale(1.03) rotate(0.2deg); opacity: 1; }
+  100% { transform: translateZ(0) scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes bubble-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-0.6deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes bubble-wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(1.2deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-1.2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Apply only to the hero bubble to avoid affecting other .speech elements */
+.hero-bubble {
+  /* Motion One drives transforms; keep only a stable origin and hint */
+  will-change: transform;
+  transform-origin: 42px 100%; /* near the tail */
+}
+
+/* On hover/focus, give a quick playful wiggle and pause float to avoid motion conflict */
+/* Hover wiggle is now driven by Motion One to avoid resetting the base animation */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Motion animations are handled in JS; no CSS animations to disable here. */
+}
+
+/* ---------------------------------
+   Global page transition (Nuxt 3)
+   Slick, subtle slide-fade
+   --------------------------------- */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity .25s ease, transform .25s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    transform: none;
+  }
+}

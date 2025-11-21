@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="Pop art abstract collage">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="3" fill="rgba(0,0,0,.25)" />
+    </pattern>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.04"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <!-- background halves -->
+  <rect width="1200" height="900" fill="#c7ff2e"/>
+  <rect width="1200" height="450" fill="#10c8ff"/>
+
+  <!-- halftone overlay -->
+  <rect width="1200" height="900" fill="url(#dots)" opacity="0.5"/>
+
+  <!-- comic burst shapes -->
+  <g>
+    <circle cx="250" cy="650" r="170" fill="#ff0bd2" stroke="#000" stroke-width="12"/>
+    <rect x="760" y="110" width="260" height="260" rx="48" fill="#ff8e00" stroke="#000" stroke-width="12"/>
+    <circle cx="980" cy="690" r="150" fill="#10c8ff" stroke="#000" stroke-width="12"/>
+  </g>
+
+  <!-- speech bubble style label -->
+  <g transform="translate(120,120)">
+    <rect x="0" y="0" width="620" height="160" rx="28" fill="#fff" stroke="#000" stroke-width="12"/>
+    <path d="M180,160 l40,48 l16,-60" fill="#000"/>
+    <path d="M188,160 l28,28 l10,-36" fill="#fff"/>
+    <text x="32" y="106" font-family="'Bangers', 'Arial Black', sans-serif" font-size="72" fill="#000">ブシドー・デジタル</text>
+  </g>
+
+  <!-- brand title -->
+  <g filter="url(#grain)">
+    <text x="120" y="420" font-family="'Bangers', 'Arial Black', sans-serif" font-weight="900" font-size="96" fill="#000" stroke="#000" stroke-width="2">
+      BUSHIDO.DIGITAL
+    </text>
+  </g>
+
+  <!-- frame stroke -->
+  <rect x="8" y="8" width="1184" height="884" fill="none" stroke="#000" stroke-width="16"/>
+</svg>

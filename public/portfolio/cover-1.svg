@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Neon pop cover 1">
+  <defs>
+    <pattern id="dots1" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="3" fill="rgba(0,0,0,.25)" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="#c7ff2e"/>
+  <rect width="1200" height="450" fill="#10c8ff"/>
+  <rect width="1200" height="900" fill="url(#dots1)" opacity=".45"/>
+  <g stroke="#000" stroke-width="14" fill="#ff0bd2">
+    <circle cx="260" cy="640" r="160"/>
+  </g>
+  <rect x="760" y="140" width="280" height="280" rx="48" fill="#ff8e00" stroke="#000" stroke-width="14"/>
+  <rect x="20" y="20" width="1160" height="860" fill="none" stroke="#000" stroke-width="20"/>
+</svg>
