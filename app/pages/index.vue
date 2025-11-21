@@ -16,7 +16,7 @@
           </p>
           <div class="mt-8 flex gap-4">
             <NuxtLink class="pop-btn px-6 py-3 rounded-xl inline-block hero-seq" to="/portfolio">See our work</NuxtLink>
-            <NuxtLink class="pop-btn px-6 py-3 rounded-xl inline-block bg-neo-orange hero-seq" to="#contact">Start a project
+            <NuxtLink class="pop-btn px-6 py-3 rounded-xl inline-block bg-neo-orange hero-seq" to="/contact">Start a project
             </NuxtLink>
           </div>
         </div>
