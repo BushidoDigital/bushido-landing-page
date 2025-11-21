@@ -32,12 +32,14 @@
       </div>
       <!-- background blobs — responsive & fluid: hidden on phones, scale on tablets, full by xl -->
       <div
+          ref="limeBlob"
           class="hidden md:block pointer-events-none absolute -top-16 rounded-full bg-neo-lime border-[6px] border-black -z-10
                  w-[clamp(220px,28vw,420px)] h-[clamp(220px,28vw,420px)]
                  md:right-[max(-8px,env(safe-area-inset-right))]
                  md:translate-x-[clamp(4px,4vw,28px)] xl:translate-x-[28px]
           "></div>
       <div
+          ref="magentaBlob"
           class="hidden md:block pointer-events-none absolute bottom-0 bg-neo-magenta border-[6px] border-black rotate-3 -z-10
                  w-[clamp(320px,40vw,520px)] h-[clamp(140px,18vw,240px)]
                  md:left-[max(-12px,env(safe-area-inset-left))]
@@ -85,6 +87,8 @@ import {animate, stagger, inView} from 'motion'
 const bubble = ref<HTMLElement | null>(null)
 const hero = ref<HTMLElement | null>(null)
 const services = ref<HTMLElement | null>(null)
+const limeBlob = ref<HTMLElement | null>(null)
+const magentaBlob = ref<HTMLElement | null>(null)
 const servicesReady = ref(false)
 let floatControls: ReturnType<typeof animate> | null = null
 
@@ -94,6 +98,25 @@ onMounted(() => {
 
   const prefersReduce = typeof window !== 'undefined' &&
       window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Animate decorative blobs - unfold from center with rotation
+  if (!prefersReduce) {
+    if (limeBlob.value) {
+      animate(
+        limeBlob.value,
+        { scale: [0, 1.1, 1], rotate: [180, 0] },
+        { duration: 1.2, delay: 0.1, easing: [0.34, 1.56, 0.64, 1] } // Bouncy easing
+      )
+    }
+
+    if (magentaBlob.value) {
+      animate(
+        magentaBlob.value,
+        { scale: [0, 1.1, 1], rotate: [-180, 3] },
+        { duration: 1.2, delay: 0.3, easing: [0.34, 1.56, 0.64, 1] }
+      )
+    }
+  }
 
   // We want the bubble to appear LAST. Hide it initially and reveal after hero finishes.
   const heroWaits: Promise<unknown>[] = []

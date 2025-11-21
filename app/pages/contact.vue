@@ -4,14 +4,14 @@
     <div class="halftone absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true"></div>
 
     <!-- Decorative accent blobs -->
-    <div class="absolute top-20 -right-20 w-80 h-80 bg-neo-lime/30 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-    <div class="absolute bottom-40 -left-20 w-96 h-96 bg-neo-orange/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div ref="blob1" class="absolute top-20 -right-20 w-80 h-80 bg-neo-lime/30 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div ref="blob2" class="absolute bottom-40 -left-20 w-96 h-96 bg-neo-orange/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
     <!-- Comic Sound Effects -->
-    <div class="absolute top-32 right-10 comic text-6xl md:text-8xl font-black text-neo-orange opacity-20 -rotate-12 pointer-events-none select-none" aria-hidden="true">
+    <div ref="powText" class="absolute top-32 right-10 comic text-6xl md:text-8xl font-black text-neo-orange opacity-20 -rotate-12 pointer-events-none select-none" aria-hidden="true">
       POW!
     </div>
-    <div class="absolute bottom-32 left-10 comic text-5xl md:text-7xl font-black text-neo-cyan opacity-20 rotate-6 pointer-events-none select-none" aria-hidden="true">
+    <div ref="zapText" class="absolute bottom-32 left-10 comic text-5xl md:text-7xl font-black text-neo-cyan opacity-20 rotate-6 pointer-events-none select-none" aria-hidden="true">
       ZAP!
     </div>
 
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Speech bubble -->
-        <div class="hidden lg:block absolute -right-20 top-0 speech bg-white px-6 py-4 max-w-xs animate-float">
+        <div ref="speechBubble" class="hidden lg:block absolute -right-20 top-0 speech bg-white px-6 py-4 max-w-xs animate-float">
           <p class="comic text-xl font-black ink">We're friendly, we promise!</p>
         </div>
       </div>
@@ -65,7 +65,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { animate } from 'motion'
 
 // Page-specific SEO
 useSeoMeta({
@@ -79,6 +80,13 @@ useHead({
     class: ['bg-neo-magenta']
   }
 })
+
+// Refs for entrance animations
+const blob1 = ref<HTMLElement>()
+const blob2 = ref<HTMLElement>()
+const powText = ref<HTMLElement>()
+const zapText = ref<HTMLElement>()
+const speechBubble = ref<HTMLElement>()
 
 // POW! effect state
 interface Pow {
@@ -119,6 +127,56 @@ function showPow(event: MouseEvent) {
     pows.value = pows.value.filter(p => p.id !== pow.id)
   }, 600)
 }
+
+// Entrance animations on mount
+onMounted(() => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (prefersReducedMotion) return
+
+  // Animate decorative blobs - unfold from center
+  if (blob1.value) {
+    animate(
+      blob1.value,
+      { scale: [0, 1], opacity: [0, 0.3], rotate: [180, 0] },
+      { duration: 1.2, delay: 0.2, easing: [0.34, 1.56, 0.64, 1] } // Bouncy easing
+    )
+  }
+
+  if (blob2.value) {
+    animate(
+      blob2.value,
+      { scale: [0, 1], opacity: [0, 0.2], rotate: [-180, 0] },
+      { duration: 1.2, delay: 0.4, easing: [0.34, 1.56, 0.64, 1] }
+    )
+  }
+
+  // Animate POW! - pop in with rotation
+  if (powText.value) {
+    animate(
+      powText.value,
+      { scale: [0, 1.2, 1], opacity: [0, 0.2], rotate: [-90, -12] },
+      { duration: 0.8, delay: 0.6, easing: [0.34, 1.56, 0.64, 1] }
+    )
+  }
+
+  // Animate ZAP! - pop in with opposite rotation
+  if (zapText.value) {
+    animate(
+      zapText.value,
+      { scale: [0, 1.2, 1], opacity: [0, 0.2], rotate: [90, 6] },
+      { duration: 0.8, delay: 0.8, easing: [0.34, 1.56, 0.64, 1] }
+    )
+  }
+
+  // Animate speech bubble - slide and bounce
+  if (speechBubble.value) {
+    animate(
+      speechBubble.value,
+      { scale: [0, 1.1, 1], x: [50, 0], opacity: [0, 1] },
+      { duration: 0.6, delay: 1, easing: [0.34, 1.56, 0.64, 1] }
+    )
+  }
+})
 </script>
 
 <style scoped>
