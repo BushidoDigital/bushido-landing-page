@@ -15,7 +15,7 @@
 
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-4">
-        <NuxtLink to="#services" class="px-3 py-2 rounded-lg ink font-semibold hover:underline underline-offset-4">What we build</NuxtLink>
+        <NuxtLink to="/" class="px-3 py-2 rounded-lg ink font-semibold hover:underline underline-offset-4">Home</NuxtLink>
         <NuxtLink to="/portfolio" class="px-3 py-2 rounded-lg ink font-semibold hover:underline underline-offset-4">Work</NuxtLink>
         <NuxtLink to="/contact" class="pop-btn px-4 py-2 rounded-xl inline-flex items-center gap-2 bg-neo-magenta">
           <UIcon name="i-heroicons-paper-airplane" />
@@ -44,7 +44,7 @@
         class="md:hidden px-4 pb-3 pt-2 space-y-2 border-t-4 border-black bg-white/98 supports-[backdrop-filter]:backdrop-blur rounded-b-xl shadow-[6px_6px_0_#000]"
         :style="safeInsets"
       >
-        <NuxtLink @click="close()" to="#services" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">What we build</NuxtLink>
+        <NuxtLink @click="close()" to="/" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">Home</NuxtLink>
         <NuxtLink @click="close()" to="/portfolio" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">Work</NuxtLink>
         <NuxtLink @click="close()" to="/contact" class="block pop-btn px-4 py-3 rounded-xl inline-flex items-center gap-2 bg-neo-magenta">
           <UIcon name="i-heroicons-paper-airplane" />
