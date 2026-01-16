@@ -18,7 +18,7 @@ export default defineNuxtConfig({
                 // Comic display + Japanese support
                 { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
                 { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&display=swap' }
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Inter+Tight:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap' }
             ]
         }
     },

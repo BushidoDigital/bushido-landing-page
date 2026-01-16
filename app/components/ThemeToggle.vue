@@ -2,7 +2,7 @@
   <button
     @click="handleToggle"
     class="theme-toggle pop-btn relative overflow-hidden px-6 py-3 font-bold rounded-lg text-sm uppercase tracking-wide"
-    :aria-label="isPlayful ? 'Switch to professional theme' : 'Switch to playful theme'"
+    :aria-label="isPlayful ? 'Switch to serious theme' : 'Switch to playful theme'"
   >
     <!-- Sliding text container -->
     <div class="relative h-5 flex items-center justify-center">
@@ -12,13 +12,13 @@
       >
         <!-- Current state text (visible) -->
         <span class="block h-5 leading-5 whitespace-nowrap flex items-center gap-1.5">
-          <span>{{ isPlayful ? 'Go Boring' : 'Get Fun!' }}</span>
-          <span class="text-base">{{ isPlayful ? '😴' : '🎨' }}</span>
+          <span>{{ isPlayful ? 'Go Serious' : 'Get Fun!' }}</span>
+          <span class="text-base">{{ isPlayful ? '👔' : '🎨' }}</span>
         </span>
         <!-- Next state text (below, will slide up) -->
-        <span class="block h-5 leading-5 whitespace-nowrap font-black flex items-center gap-1.5" :class="isPlayful ? 'text-gray-600' : 'text-neo-orange'">
-          <span>{{ isPlayful ? 'SNOOZE!' : 'WHEE!' }}</span>
-          <span class="text-base">{{ isPlayful ? '💤' : '✨' }}</span>
+        <span class="block h-5 leading-5 whitespace-nowrap font-black flex items-center gap-1.5" :class="isPlayful ? 'text-slate-600' : 'text-neo-orange'">
+          <span>{{ isPlayful ? 'SUIT UP!' : 'WHEE!' }}</span>
+          <span class="text-base">{{ isPlayful ? '🎩' : '✨' }}</span>
         </span>
       </div>
     </div>
@@ -28,14 +28,17 @@
 <script setup lang="ts">
 const { toggleTheme, isPlayful } = useTheme()
 const isToggling = ref(false)
+let pendingEvent: MouseEvent | null = null
 
-const handleToggle = () => {
+const handleToggle = (event: MouseEvent) => {
   isToggling.value = true
+  pendingEvent = event
 
-  // Wait for animation to complete before actually changing theme
+  // Wait for text animation to complete before triggering theme change
   setTimeout(() => {
-    toggleTheme()
+    toggleTheme(pendingEvent || undefined)
     isToggling.value = false
+    pendingEvent = null
   }, 400)
 }
 </script>

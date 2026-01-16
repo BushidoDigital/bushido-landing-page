@@ -1,23 +1,26 @@
 <template>
-  <div class="home-page relative bg-neo-cyan flex-1 flex items-start md:items-center overflow-hidden">
-    <!-- Speed lines background -->
+  <div class="home-page relative flex-1 flex items-start md:items-center overflow-hidden transition-colors duration-500 bg-neo-cyan">
+    <!-- Speed lines background (playful mode) -->
     <div ref="speedLinesRef" class="absolute inset-0 pointer-events-none opacity-0" aria-hidden="true">
       <div class="speed-lines"></div>
     </div>
 
-    <!-- Halftone pattern overlay -->
+    <!-- Halftone pattern overlay (playful mode) -->
     <div class="absolute inset-0 halftone-bg pointer-events-none" aria-hidden="true"></div>
+
+    <!-- Subtle grid pattern (serious mode) -->
+    <div v-if="isSerious" class="absolute inset-0 serious-grid pointer-events-none" aria-hidden="true" />
 
     <!-- Main content -->
     <section class="container relative z-10 py-6 md:py-6">
       <div class="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 items-center w-full">
         <!-- Left side - Hero text -->
         <div class="space-y-3 md:space-y-4 lg:space-y-6 text-center md:text-left">
-          <div ref="bubble" class="speech inline-block text-sm md:text-sm lg:text-base opacity-0" tabindex="0">
+          <div v-show="!isSerious" ref="bubble" class="speech inline-block text-sm md:text-sm lg:text-base opacity-0" tabindex="0">
             <span class="font-bold">なぜこれを翻訳するのでしょうか？</span>
           </div>
 
-          <h1 class="comic text-5xl sm:text-6xl md:text-6xl lg:text-8xl xl:text-9xl font-black ink leading-[0.9]">
+          <h1 class="comic text-5xl sm:text-6xl md:text-6xl lg:text-8xl xl:text-9xl font-black ink leading-[0.9] hero-headline">
             <span ref="line1Ref" class="block opacity-0">Web apps</span>
             <span ref="line2Ref" class="block opacity-0">with punch.</span>
           </h1>
@@ -97,6 +100,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { animate } from 'motion'
+
+// Theme state
+const { isSerious } = useTheme()
 
 // Refs for animations
 const speedLinesRef = ref<HTMLElement | null>(null)

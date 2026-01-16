@@ -5,6 +5,9 @@
       <slot />
     </main>
     <SiteFooter v-if="!isHomePage" />
+
+    <!-- Theme transition overlay -->
+    <LayoutTransitionOverlay />
   </div>
 </template>
 

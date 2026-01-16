@@ -1,11 +1,14 @@
 <template>
-  <div class="portfolio-page relative bg-neo-cyan flex-1 flex flex-col overflow-hidden">
+  <div class="portfolio-page relative flex-1 flex flex-col overflow-hidden transition-colors duration-500 bg-neo-cyan">
     <!-- Scattered frames decoration -->
     <div ref="framesRef" class="fixed inset-0 pointer-events-none opacity-0" aria-hidden="true">
       <div class="frame frame-1"></div>
       <div class="frame frame-2"></div>
       <div class="frame frame-3"></div>
     </div>
+
+    <!-- Subtle grid pattern (serious mode) -->
+    <div v-if="isSerious" class="absolute inset-0 serious-grid pointer-events-none" aria-hidden="true" />
 
     <!-- Main content -->
     <section class="container relative z-10 py-6 md:py-8">
@@ -50,6 +53,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { animate } from 'motion'
+
+// Theme state
+const { isSerious } = useTheme()
 
 useSeoMeta({
   title: 'Portfolio — Bushido.digital',

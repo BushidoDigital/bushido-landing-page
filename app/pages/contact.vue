@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-page relative bg-neo-cyan flex-1 flex items-center">
+  <div class="contact-page relative flex-1 flex items-center transition-colors duration-500 bg-neo-cyan">
     <!-- Organic blob decorations - fixed to viewport so they flow everywhere -->
     <div ref="blobContainerRef" class="fixed inset-0 pointer-events-none opacity-0" aria-hidden="true">
       <div class="blob blob-1 bg-neo-lime"></div>
@@ -7,6 +7,9 @@
       <div class="blob blob-3 bg-neo-cyan"></div>
       <div class="blob blob-4 bg-neo-orange"></div>
     </div>
+
+    <!-- Subtle grid pattern (serious mode) -->
+    <div v-if="isSerious" class="absolute inset-0 serious-grid pointer-events-none" aria-hidden="true" />
 
     <!-- Main content -->
     <section class="container relative z-10 py-8 md:py-4">
@@ -121,6 +124,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { animate } from 'motion'
+
+// Theme state
+const { isSerious } = useTheme()
 
 definePageMeta({
   pageTransition: {

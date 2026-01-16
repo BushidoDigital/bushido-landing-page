@@ -1,7 +1,7 @@
 <template>
   <header
     class="sticky top-0 z-50 transition-all duration-200"
-    :class="scrolled ? 'bg-white/95 backdrop-blur-sm border-b-4 border-black shadow-[0_4px_0_#000]' : ''"
+    :class="scrolled ? 'scrolled bg-white/95 backdrop-blur-sm border-b-4 border-black shadow-[0_4px_0_#000]' : ''"
   >
     <div class="container py-2 md:py-3 flex items-center justify-between">
       <NuxtLink to="/" aria-label="Home" class="flex items-center gap-2 md:gap-3 group min-h-[44px] shrink-0">

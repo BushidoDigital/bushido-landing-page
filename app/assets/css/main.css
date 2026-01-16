@@ -21,20 +21,26 @@
   --shadow-primary: #000;
 }
 
-/* Professional (boring) theme */
-[data-theme="professional"] {
-  --neo-cyan: #e8edf2;
+/* Serious (elegant corporate) theme */
+[data-theme="serious"] {
+  --neo-cyan: #f8fafc;
   --neo-lime: #ffffff;
-  --neo-magenta: #2c5aa0;
-  --neo-orange: #5b7a9f;
-  --neo-purple: #6b7d94;
-  --bg-primary: #e8edf2;
-  --bg-card: #ffffff;
-  --bg-cta: #2c5aa0;
-  --bg-secondary: #5b7a9f;
+  --neo-magenta: #3b82f6;
+  --neo-orange: #64748b;
+  --neo-purple: #6366f1;
+  --bg-primary: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-cta: #3b82f6;
+  --bg-secondary: #64748b;
   --text-primary: #1a2332;
-  --border-primary: #404d5e;
-  --shadow-primary: rgba(0,0,0,0.15);
+  --border-primary: rgba(0, 0, 0, 0.08);
+  --shadow-primary: rgba(0,0,0,0.08);
+  /* Glassmorphism variables */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 10px;
+  /* Typography */
+  --font-display: 'Inter Tight', system-ui, sans-serif;
 }
 
 html, body, #__nuxt { height: 100%; }
@@ -217,7 +223,7 @@ footer nav a {
    ------------------------------ */
 
 /* Modern soft shadows and refined borders */
-[data-theme="professional"] .pop-card {
+[data-theme="serious"] .pop-card {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
@@ -225,7 +231,7 @@ footer nav a {
   padding: 1.5rem;
 }
 
-[data-theme="professional"] .pop-btn {
+[data-theme="serious"] .pop-btn {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -234,7 +240,7 @@ footer nav a {
   letter-spacing: 0.025em;
 }
 
-[data-theme="professional"] .speech {
+[data-theme="serious"] .speech {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
@@ -243,45 +249,45 @@ footer nav a {
 }
 
 /* Hide speech bubble tail in professional mode */
-[data-theme="professional"] .speech:before,
-[data-theme="professional"] .speech:after {
+[data-theme="serious"] .speech:before,
+[data-theme="serious"] .speech:after {
   display: none;
 }
 
 /* Minimal halftone in professional mode */
-[data-theme="professional"] .halftone {
+[data-theme="serious"] .halftone {
   opacity: 0.02 !important;
 }
 
 /* Modern service card hover effects */
-[data-theme="professional"] .service-card {
+[data-theme="serious"] .service-card {
   border-radius: 16px;
 }
 
-[data-theme="professional"] .service-card:hover {
+[data-theme="serious"] .service-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
               0 20px 50px -10px rgba(44, 90, 160, 0.15);
 }
 
-[data-theme="professional"] .service-card:active {
+[data-theme="serious"] .service-card:active {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Modern button hover effects - no offset translation */
-[data-theme="professional"] .pop-btn:hover {
+[data-theme="serious"] .pop-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
 }
 
-[data-theme="professional"] .pop-btn:active {
+[data-theme="serious"] .pop-btn:active {
   transform: translateY(0);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Softer footer styling */
-[data-theme="professional"] footer .bg-white {
+[data-theme="serious"] footer .bg-white {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06) !important;
   border-radius: 20px !important;
@@ -289,47 +295,47 @@ footer nav a {
               0 20px 60px -20px rgba(0, 0, 0, 0.1) !important;
 }
 
-[data-theme="professional"] footer .bg-white .halftone {
+[data-theme="serious"] footer .bg-white .halftone {
   opacity: 0 !important;
 }
 
 /* Hide or soften decorative corner nubs */
-[data-theme="professional"] footer .bg-neo-magenta,
-[data-theme="professional"] footer .bg-neo-lime {
+[data-theme="serious"] footer .bg-neo-magenta,
+[data-theme="serious"] footer .bg-neo-lime {
   opacity: 0.4;
   border-radius: 50%;
   border-width: 1px;
 }
 
 /* Refined social icon buttons */
-[data-theme="professional"] footer nav a {
+[data-theme="serious"] footer nav a {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-[data-theme="professional"] footer nav a:hover {
+[data-theme="serious"] footer nav a:hover {
   box-shadow: 0 4px 12px rgba(44, 90, 160, 0.15);
   transform: translateY(-2px);
 }
 
 /* Update text colors for professional theme */
-[data-theme="professional"] body {
+[data-theme="serious"] body {
   color: #1a2332;
 }
 
-[data-theme="professional"] .ink {
+[data-theme="serious"] .ink {
   color: #1a2332;
 }
 
 /* Professional navbar styling */
-[data-theme="professional"] header {
+[data-theme="serious"] header {
   border-width: 1px !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
-[data-theme="professional"] header.scrolled {
+[data-theme="serious"] header.scrolled {
   background: rgba(255, 255, 255, 0.98) !important;
   border-radius: 16px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
@@ -337,21 +343,21 @@ footer nav a {
 }
 
 /* Mobile menu button professional styling */
-[data-theme="professional"] header button[aria-controls="mobile-menu"] {
+[data-theme="serious"] header button[aria-controls="mobile-menu"] {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* Mobile menu panel professional styling */
-[data-theme="professional"] #mobile-menu {
+[data-theme="serious"] #mobile-menu {
   border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
   border-radius: 0 0 16px 16px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Theme toggle professional styling */
-[data-theme="professional"] .theme-toggle {
+[data-theme="serious"] .theme-toggle {
   border: 1px solid rgba(44, 90, 160, 0.2);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(44, 90, 160, 0.1);
@@ -360,7 +366,7 @@ footer nav a {
 }
 
 /* Soften floating shapes in professional mode */
-[data-theme="professional"] svg[aria-hidden="true"] {
+[data-theme="serious"] svg[aria-hidden="true"] {
   opacity: 0.15;
   filter: saturate(0.3);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
@@ -428,4 +434,115 @@ header button {
   .page-leave-to {
     transform: none;
   }
+}
+
+/* ------------------------------
+   Serious Mode: Display Typography
+   ------------------------------ */
+.font-display {
+  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Serious mode uses display font for headlines */
+[data-theme="serious"] .comic {
+  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Hero headline needs smaller size in serious mode (Inter Tight is wider than Bangers) */
+[data-theme="serious"] .hero-headline {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+}
+
+/* ------------------------------
+   Serious Mode: Glassmorphism Cards
+   ------------------------------ */
+[data-theme="serious"] .glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Glassmorphism for service highlight cards in serious mode */
+[data-theme="serious"] .service-highlight {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Contact cards in serious mode */
+[data-theme="serious"] .contact-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Portfolio card in serious mode */
+[data-theme="serious"] .portfolio-card .pop-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* ------------------------------
+   Serious Mode: Hide/Fade Decorations
+   ------------------------------ */
+
+/* Hide speed lines, blobs, frames in serious mode */
+[data-theme="serious"] .speed-lines,
+[data-theme="serious"] .halftone-bg {
+  opacity: 0 !important;
+  transition: opacity 0.6s ease;
+}
+
+[data-theme="serious"] .blob {
+  opacity: 0.08 !important;
+  filter: blur(40px) saturate(0.3);
+  border: none !important;
+  transition: opacity 0.6s ease, filter 0.6s ease;
+}
+
+[data-theme="serious"] .frame {
+  opacity: 0.06 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+  transition: opacity 0.6s ease;
+}
+
+/* Subtle grid pattern for serious mode background */
+[data-theme="serious"] .serious-grid {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ------------------------------
+   Serious Mode: Button Link Styles
+   ------------------------------ */
+[data-theme="serious"] .contact-card a {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="serious"] .contact-card a:hover {
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Theme toggle compact styling in serious mode */
+[data-theme="serious"] button[aria-label*="mode"] {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 10px !important;
 }

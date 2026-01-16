@@ -7,11 +7,11 @@
       'active:shadow-[1px_1px_0_#000] active:translate-x-0.5 active:translate-y-0.5',
       isPlayful ? 'bg-neo-lime' : 'bg-white'
     ]"
-    :aria-label="isPlayful ? 'Switch to sensible mode' : 'Switch to fun mode'"
+    :aria-label="isPlayful ? 'Switch to serious mode' : 'Switch to fun mode'"
   >
     <div class="flex items-center gap-1.5">
       <span class="text-base">{{ isPlayful ? '🎨' : '👔' }}</span>
-      <span class="hidden lg:inline">{{ isPlayful ? 'Fun' : 'Sensible' }}</span>
+      <span class="hidden lg:inline">{{ isPlayful ? 'Fun' : 'Serious' }}</span>
     </div>
   </button>
 </template>
@@ -19,7 +19,7 @@
 <script setup lang="ts">
 const { toggleTheme, isPlayful } = useTheme()
 
-const handleToggle = () => {
-  toggleTheme()
+const handleToggle = (event: MouseEvent) => {
+  toggleTheme(event)
 }
 </script>
