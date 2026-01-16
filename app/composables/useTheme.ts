@@ -19,6 +19,13 @@ export const useTheme = () => {
   const transitionOrigin = useState<TransitionOrigin | null>('theme-transition-origin', () => null)
   const transitionTarget = useState<Theme | null>('theme-transition-target', () => null)
 
+  // Reactive useHead to keep data-theme attribute in sync (works on both server and client)
+  useHead({
+    htmlAttrs: {
+      'data-theme': computed(() => theme.value)
+    }
+  })
+
   // Toggle theme with click event for transition animation origin
   const toggleTheme = (clickEvent?: MouseEvent) => {
     // Set transition origin from click event
@@ -48,10 +55,6 @@ export const useTheme = () => {
     if (transitionTarget.value) {
       theme.value = transitionTarget.value
       themeCookie.value = transitionTarget.value
-
-      if (import.meta.client) {
-        document.documentElement.setAttribute('data-theme', transitionTarget.value)
-      }
     }
   }
 
@@ -65,16 +68,6 @@ export const useTheme = () => {
   const setTheme = (newTheme: Theme) => {
     theme.value = newTheme
     themeCookie.value = newTheme
-    if (import.meta.client) {
-      document.documentElement.setAttribute('data-theme', newTheme)
-    }
-  }
-
-  // Initialize theme on mount
-  if (import.meta.client) {
-    onMounted(() => {
-      document.documentElement.setAttribute('data-theme', theme.value)
-    })
   }
 
   return {
