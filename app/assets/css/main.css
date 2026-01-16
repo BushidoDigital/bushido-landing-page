@@ -365,12 +365,32 @@ footer nav a {
   color: #fff;
 }
 
-/* Soften floating shapes in professional mode */
+/* Soften floating shapes in serious mode */
 [data-theme="serious"] svg[aria-hidden="true"] {
   opacity: 0.15;
   filter: saturate(0.3);
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
               filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Make icons/SVGs grayscale in serious mode */
+[data-theme="serious"] .service-highlight svg,
+[data-theme="serious"] .service-highlight .iconify,
+[data-theme="serious"] .service-card svg,
+[data-theme="serious"] .contact-card svg,
+[data-theme="serious"] .pop-card svg {
+  filter: grayscale(1);
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Portfolio images grayscale in serious mode (with hover to reveal color) */
+[data-theme="serious"] .portfolio-card img {
+  filter: grayscale(1);
+  transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="serious"] .portfolio-card:hover img {
+  filter: grayscale(0);
 }
 
 /* Transition for header elements */
@@ -391,11 +411,9 @@ header button {
               transform 0.2s ease;
 }
 
+/* Mobile menu transitions handled by Vue - only transition colors on theme change, not open/close */
 #mobile-menu {
-  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none;
 }
 
 /* ---------------------------------
@@ -492,6 +510,14 @@ header button {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* CTA cards in serious mode - white/glass instead of solid color */
+[data-theme="serious"] .pop-card.bg-neo-magenta {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  color: var(--text-primary);
 }
 
 /* ------------------------------

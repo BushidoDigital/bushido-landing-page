@@ -99,18 +99,18 @@ const seriousOverlayStyle = computed(() => {
 })
 
 const getCircleStyle = (circle: { delay: number; scale: number }, idx: number) => {
-  if (!transitionOrigin.value) return {}
+  // Fun transition always starts from center of screen
+  const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 500
+  const centerY = typeof window !== 'undefined' ? window.innerHeight / 2 : 400
 
   const maxRadius = Math.max(
-    Math.hypot(transitionOrigin.value.x, transitionOrigin.value.y),
-    Math.hypot(window.innerWidth - transitionOrigin.value.x, transitionOrigin.value.y),
-    Math.hypot(transitionOrigin.value.x, window.innerHeight - transitionOrigin.value.y),
-    Math.hypot(window.innerWidth - transitionOrigin.value.x, window.innerHeight - transitionOrigin.value.y)
-  )
+    Math.hypot(centerX, centerY),
+    Math.hypot(centerX, centerY)
+  ) * 1.2
 
   return {
-    '--origin-x': `${transitionOrigin.value.x}px`,
-    '--origin-y': `${transitionOrigin.value.y}px`,
+    '--origin-x': `${centerX}px`,
+    '--origin-y': `${centerY}px`,
     '--max-radius': `${maxRadius * 1.3 * circle.scale}px`,
     '--delay': `${circle.delay}ms`,
     'animation-delay': `${circle.delay}ms`
@@ -118,18 +118,20 @@ const getCircleStyle = (circle: { delay: number; scale: number }, idx: number) =
 }
 
 const actionLinesStyle = computed(() => {
-  if (!transitionOrigin.value) return {}
+  // Action lines also from center
+  const centerX = typeof window !== 'undefined' ? window.innerWidth / 2 : 500
+  const centerY = typeof window !== 'undefined' ? window.innerHeight / 2 : 400
   return {
-    '--origin-x': `${transitionOrigin.value.x}px`,
-    '--origin-y': `${transitionOrigin.value.y}px`
+    '--origin-x': `${centerX}px`,
+    '--origin-y': `${centerY}px`
   }
 })
 
 const powBurstStyle = computed(() => {
-  if (!transitionOrigin.value) return {}
+  // Always center the POW burst on screen
   return {
-    left: `${transitionOrigin.value.x}px`,
-    top: `${transitionOrigin.value.y}px`,
+    left: '50%',
+    top: '50%',
     transform: 'translate(-50%, -50%)'
   }
 })

@@ -22,7 +22,12 @@
       <!-- Mobile menu toggle -->
       <button
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border-4 border-black bg-neo-orange shadow-[4px_4px_0_#000] focus:outline-none focus:ring-2 focus:ring-black"
+        :class="[
+          'md:hidden inline-flex items-center justify-center w-11 h-11 focus:outline-none focus:ring-2',
+          isSerious
+            ? 'rounded-lg border border-gray-200 bg-white shadow-sm focus:ring-blue-500'
+            : 'rounded-xl border-4 border-black bg-neo-orange shadow-[4px_4px_0_#000] focus:ring-black'
+        ]"
         :aria-expanded="open ? 'true' : 'false'"
         aria-controls="mobile-menu"
         @click="toggle()"
@@ -33,11 +38,16 @@
     </div>
 
     <!-- Mobile menu panel -->
-    <transition name="collapse">
+    <transition :name="isSerious ? 'slide' : 'collapse'">
       <div
         v-show="open"
         id="mobile-menu"
-        class="md:hidden px-4 pb-3 pt-2 space-y-2 border-t-4 border-black bg-neo-orange rounded-b-xl shadow-[6px_6px_0_#000]"
+        :class="[
+          'md:hidden px-4 pb-4 pt-3 space-y-2',
+          isSerious
+            ? 'bg-white border-t border-gray-100 shadow-lg'
+            : 'border-t-4 border-black bg-neo-orange rounded-b-xl shadow-[6px_6px_0_#000]'
+        ]"
         :style="safeInsets"
       >
         <NuxtLink @click="close()" to="/" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">Home</NuxtLink>
@@ -45,9 +55,18 @@
         <div class="py-2">
           <ThemeToggleCompact />
         </div>
-        <NuxtLink @click="close()" to="/contact" class="block pop-btn px-4 py-3 rounded-xl inline-flex items-center gap-2 bg-neo-magenta">
+        <NuxtLink
+          @click="close()"
+          to="/contact"
+          :class="[
+            'block px-4 py-3 rounded-xl inline-flex items-center gap-2 font-bold',
+            isSerious
+              ? 'bg-blue-500 text-white shadow-sm hover:bg-blue-600'
+              : 'pop-btn bg-neo-magenta'
+          ]"
+        >
           <UIcon name="i-heroicons-paper-airplane" />
-          <span class="font-bold">Start something</span>
+          <span>Start something</span>
         </NuxtLink>
       </div>
     </transition>
@@ -59,6 +78,7 @@ import { onMounted, onBeforeUnmount, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 defineOptions({ name: 'SiteNavbar' })
 
+const { isSerious } = useTheme()
 const open = ref(false)
 const scrolled = ref(false)
 const route = useRoute()
@@ -110,11 +130,18 @@ watch(() => route.fullPath, () => close())
 /* Ensure header spans full width without causing horizontal scroll */
 header { contain: layout paint style; }
 
-/* Simple collapse transition for the mobile panel */
+/* Playful mode: bouncy collapse transition */
 .collapse-enter-active, .collapse-leave-active {
   transition: opacity .15s ease, transform .15s ease;
   transform-origin: top;
 }
 .collapse-enter-from, .collapse-leave-to { opacity: 0; transform: scaleY(0.98); }
 .collapse-enter-to, .collapse-leave-from { opacity: 1; transform: scaleY(1); }
+
+/* Serious mode: smooth slide transition */
+.slide-enter-active, .slide-leave-active {
+  transition: opacity .2s ease, transform .2s ease;
+}
+.slide-enter-from, .slide-leave-to { opacity: 0; transform: translateY(-8px); }
+.slide-enter-to, .slide-leave-from { opacity: 1; transform: translateY(0); }
 </style>
