@@ -1,12 +1,7 @@
 <template>
   <header
-    :class="[
-      // Mobile-first thinner frame; thicker from md up
-      'sticky top-0 z-50 transition-all duration-200 border-[4px] md:border-[6px] border-transparent',
-      scrolled
-        ? 'bg-white/95 supports-[backdrop-filter]:backdrop-blur border-black rounded-xl md:rounded-2xl shadow-[6px_6px_0_#000] md:shadow-[8px_8px_0_#000]'
-        : 'bg-transparent'
-    ]"
+    class="sticky top-0 z-50 transition-all duration-200"
+    :class="scrolled ? 'bg-white/95 backdrop-blur-sm border-b-4 border-black shadow-[0_4px_0_#000]' : ''"
   >
     <div class="container py-2 md:py-3 flex items-center justify-between">
       <NuxtLink to="/" aria-label="Home" class="flex items-center gap-2 md:gap-3 group min-h-[44px] shrink-0">
@@ -17,6 +12,7 @@
       <nav class="hidden md:flex items-center gap-4">
         <NuxtLink to="/" class="px-3 py-2 rounded-lg ink font-semibold hover:underline underline-offset-4">Home</NuxtLink>
         <NuxtLink to="/portfolio" class="px-3 py-2 rounded-lg ink font-semibold hover:underline underline-offset-4">Work</NuxtLink>
+        <ThemeToggleCompact />
         <NuxtLink to="/contact" class="pop-btn px-4 py-2 rounded-xl inline-flex items-center gap-2 bg-neo-magenta">
           <UIcon name="i-heroicons-paper-airplane" />
           <span class="font-bold">Start something</span>
@@ -26,7 +22,7 @@
       <!-- Mobile menu toggle -->
       <button
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border-4 border-black bg-white/95 shadow-[4px_4px_0_#000] focus:outline-none focus:ring-2 focus:ring-black"
+        class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border-4 border-black bg-neo-orange shadow-[4px_4px_0_#000] focus:outline-none focus:ring-2 focus:ring-black"
         :aria-expanded="open ? 'true' : 'false'"
         aria-controls="mobile-menu"
         @click="toggle()"
@@ -41,11 +37,14 @@
       <div
         v-show="open"
         id="mobile-menu"
-        class="md:hidden px-4 pb-3 pt-2 space-y-2 border-t-4 border-black bg-white/98 supports-[backdrop-filter]:backdrop-blur rounded-b-xl shadow-[6px_6px_0_#000]"
+        class="md:hidden px-4 pb-3 pt-2 space-y-2 border-t-4 border-black bg-neo-orange rounded-b-xl shadow-[6px_6px_0_#000]"
         :style="safeInsets"
       >
         <NuxtLink @click="close()" to="/" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">Home</NuxtLink>
         <NuxtLink @click="close()" to="/portfolio" class="block px-3 py-3 rounded-lg ink font-semibold hover:underline underline-offset-4">Work</NuxtLink>
+        <div class="py-2">
+          <ThemeToggleCompact />
+        </div>
         <NuxtLink @click="close()" to="/contact" class="block pop-btn px-4 py-3 rounded-xl inline-flex items-center gap-2 bg-neo-magenta">
           <UIcon name="i-heroicons-paper-airplane" />
           <span class="font-bold">Start something</span>
@@ -60,12 +59,17 @@ import { onMounted, onBeforeUnmount, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 defineOptions({ name: 'SiteNavbar' })
 
-const scrolled = ref(false)
 const open = ref(false)
+const scrolled = ref(false)
 const route = useRoute()
 
 function toggle() { open.value = !open.value }
 function close() { open.value = false }
+
+// Track scroll position for navbar background
+function onScroll() {
+  scrolled.value = window.scrollY > 20
+}
 
 // Safe-area aware inline padding for the mobile dropdown
 const safeInsets = computed(() => ({
@@ -74,18 +78,18 @@ const safeInsets = computed(() => ({
 }))
 
 onMounted(() => {
-  const onScroll = () => {
-    // Toggle once user scrolls a little bit
-    scrolled.value = window.scrollY > 8
-  }
-  onScroll()
-  window.addEventListener('scroll', onScroll, { passive: true })
-  onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
-
   // Close on ESC
   const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close() }
   window.addEventListener('keydown', onKey)
-  onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+
+  // Scroll listener for navbar background
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll() // Check initial scroll position
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('keydown', onKey)
+    window.removeEventListener('scroll', onScroll)
+  })
 })
 
 // Lock page scroll when mobile menu is open

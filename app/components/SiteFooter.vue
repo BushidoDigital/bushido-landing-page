@@ -1,5 +1,5 @@
 <template>
-  <footer aria-label="Site footer" class="mt-20 mb-8">
+  <footer aria-label="Site footer" class="relative z-50 pb-4">
     <!-- Simplified single-line footer -->
     <div
       class="container relative bg-white border-[4px] border-black rounded-xl shadow-[6px_6px_0_#000] overflow-hidden"
@@ -9,7 +9,7 @@
       <div class="absolute inset-0 pointer-events-none opacity-[0.06] halftone" aria-hidden="true"></div>
 
       <!-- Single line content -->
-      <div class="relative z-10 px-4 py-4 flex items-center justify-between">
+      <div class="relative z-10 px-4 py-4 flex items-center justify-between gap-4">
         <!-- Logo + Copyright -->
         <div class="flex items-center gap-3 md:gap-4">
           <NuxtLink to="/" class="flex items-center group">

@@ -1,16 +1,28 @@
 <template>
-  <div class="pop-card rounded-2xl p-6 bg-neo-lime service-card">
+  <div :class="[
+    'pop-card rounded-xl md:rounded bg-neo-lime service-card',
+    compact ? 'p-3 md:p-2 lg:p-5' : 'p-6'
+  ]">
     <div class="inline-flex items-center gap-2">
-      <div class="w-12 h-12 rounded-md bg-neo-orange flex items-center justify-center border-[4px] border-black">
-        <UIcon :name="icon" class="text-2xl ink" />
+      <div :class="[
+        'rounded-md md:rounded bg-neo-orange flex items-center justify-center border-black',
+        compact ? 'w-9 h-9 md:w-6 md:h-6 lg:w-11 lg:h-11 border-[3px] md:border-[2px] lg:border-[3px]' : 'w-12 h-12 border-[4px]'
+      ]">
+        <UIcon :name="icon" :class="[compact ? 'text-lg md:text-sm lg:text-xl' : 'text-2xl', 'ink']" />
       </div>
     </div>
-    <h3 class="mt-3 text-2xl font-black ink comic">{{ title }}</h3>
-    <p class="mt-2 ink/80">{{ desc }}</p>
+    <h3 :class="[
+      'font-black ink comic',
+      compact ? 'mt-2 md:mt-1 lg:mt-2 text-base md:text-xs lg:text-xl' : 'mt-3 text-2xl'
+    ]">{{ title }}</h3>
+    <p :class="[
+      'ink/80',
+      compact ? 'mt-1 md:mt-0.5 lg:mt-2 text-xs md:text-[10px] md:leading-tight lg:text-sm leading-snug' : 'mt-2'
+    ]">{{ desc }}</p>
   </div>
 
 </template>
 
 <script setup lang="ts">
-defineProps<{ icon: string; title: string; desc: string }>()
+defineProps<{ icon: string; title: string; desc: string; compact?: boolean }>()
 </script>

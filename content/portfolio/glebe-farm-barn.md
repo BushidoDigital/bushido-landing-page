@@ -1,44 +1,23 @@
 ---
-title: Glebe Farm Barn — Wedding Venue Website
-excerpt: "End‑to‑end build: we designed and implemented the frontend and backend for a fast, easy‑to‑manage venue site."
+title: Glebe Farm Barn
+excerpt: "A beautiful wedding venue website with an online booking system — helping couples find and book their perfect day."
 date: 2025-11-05
 cover: /portfolio/wedding.png
 tags:
-  - website
-  - frontend
-  - backend
-  - nuxt
-  - django
-  - directus
+  - Website
+  - Booking System
+  - Content Management
 client: Glebe Farm Barn
 ---
 
-A countryside wedding venue needed a digital presence that could handle everything from showcasing their beautiful space to managing bookings and customer enquiries.
+A countryside wedding venue needed a website that would showcase their stunning space and make it easy for couples to enquire and book.
 
-## Chapter 1: The Foundation
+## What we built
 
-We started by building a **Wagtail CMS** frontend website — a flexible, editor-friendly system that let the venue team manage their content without having to know how to code. The frontend brought their vision to life with beautiful imagery allowing customers to easily understand the venue's history and unique features..
+We created a beautiful, fast website that lets the venue team update content themselves — no developer needed for day-to-day changes. The site highlights the barn's unique character through gorgeous imagery and clear information about packages and availability.
 
-The impact? Customer support enquiries **increased significantly** through a streamlined contact form that made it dead simple for couples to get in touch.
+**The result?** Enquiries increased significantly thanks to a streamlined contact form that made it simple for couples to get in touch.
 
-## Chapter 2: Evolution
+## What's next
 
-Fast forward to today, and we're **rebuilding from the ground up** with modern tools:
-
-- **Directus CMS** — A headless CMS that gives the team even more flexibility
-- **Nuxt 3** — Lightning-fast SSR frontend with incredible performance
-- **Modern architecture** — Cleaner separation, easier maintenance, better DX
-
-## Chapter 3: The Booking Revolution
-
-We're not stopping there. Currently in development:
-
-> A **Django Rest Framework** booking system that lets couples book venue viewings and wedding dates directly online — no more email ping-pong.
-
-**What this means:**
-- Real-time availability checking
-- Automated confirmation flows
-- Integrated calendar management
-- Seamless payment processing
-
-The venue team gets their time back. Couples get instant bookings. Everyone wins.
+We're currently building an online booking system so couples can check availability and book viewings directly — no more back-and-forth emails. The venue team will have a calendar dashboard to manage everything in one place.

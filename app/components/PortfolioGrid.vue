@@ -1,63 +1,52 @@
 <template>
   <div class="relative">
-    <!-- Decorative halftone background -->
-    <div class="halftone absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true"></div>
-
-    <!-- Decorative accent blobs -->
-    <div class="absolute top-20 -right-20 w-64 h-64 bg-neo-orange/30 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-    <div class="absolute bottom-40 -left-20 w-80 h-80 bg-neo-purple/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-
-    <div v-if="!items.length" class="ink/80">No projects yet. Add Markdown files under <code>content/portfolio</code>.
+    <div v-if="!items.length" class="ink/80 text-center py-8">
+      No projects yet.
     </div>
 
-    <!-- Asymmetric grid: larger first card, offset second card -->
-    <div class="relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
+    <!-- Clean grid: equal cards that scale well with any count -->
+    <div class="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-4">
       <NuxtLink
         v-for="(p, idx) in limited"
         :key="p.path"
         :to="p.path"
         :ref="el => { if (el) cardRefs[idx] = el }"
         class="group block portfolio-card"
-        :class="idx === 0 ? 'md:col-span-7' : 'md:col-span-5 md:mt-12'"
       >
-        <!-- Pop card wraps ALL content so nothing sits outside the card -->
+        <!-- Pop card with white content area for readability -->
         <div
-          class="pop-card relative rounded-2xl overflow-visible transition-all duration-300"
-          :class="[
-            getCategoryColor(p.tags),
-            'hover:shadow-[12px_12px_0_#000]'
-          ]"
+          class="pop-card relative rounded-xl md:rounded-xl overflow-hidden transition-all duration-300 bg-white hover:shadow-[6px_6px_0_#000] md:hover:shadow-[8px_8px_0_#000]"
           :style="cardStyle"
         >
-          <!-- NEW badge stays within the card bounds -->
+          <!-- NEW badge -->
           <div v-if="isRecent(p.date)"
-               class="absolute top-3 left-3 bg-neo-magenta text-black comic text-sm px-3 py-1 border-[4px] border-black rounded-md shadow-[6px_6px_0_#000] z-10">
+               class="absolute top-2 left-2 bg-neo-magenta text-black comic text-xs px-2 py-0.5 border-2 border-black rounded shadow-[2px_2px_0_#000] z-10">
             NEW
           </div>
 
-          <!-- Image frame: full size cover image -->
-          <div class="aspect-[4/3] rounded-t-2xl overflow-hidden bg-white">
+          <!-- Image - more compact aspect ratio on desktop -->
+          <div class="aspect-[16/10] md:aspect-[2.2/1] overflow-hidden bg-gray-100 rounded-t-lg md:rounded-t-xl">
             <img :src="coverUrl(p.cover)" :alt="p.title"
-                 class="w-full h-full object-cover transition duration-300 group-hover:scale-[1.01]"
+                 class="w-full h-full object-cover transition duration-300 group-hover:scale-[1.02]"
                  onerror="this.style.display='none'">
           </div>
 
-          <!-- Meta inside the card -->
-          <div class="px-4 pt-3 pb-4">
-            <div class="flex items-start gap-3">
-              <div class="min-w-0 flex-1">
-                <h3 class="comic text-xl font-black leading-tight" :class="getTextColor(p.tags)">{{ p.title }}</h3>
-                <p class="text-sm line-clamp-3" :class="getTextColorSecondary(p.tags)">{{ p.excerpt }}</p>
-                <!-- Tags: small chips under the excerpt -->
-                <div v-if="p.tags?.length" class="mt-2 flex flex-wrap gap-2">
-                  <span v-for="t in p.tags" :key="t"
-                        class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border border-black bg-white shadow-[3px_3px_0_#000]">
-                    {{ t }}
-                  </span>
-                </div>
-              </div>
-              <UIcon name="i-heroicons-arrow-right"
-                     class="shrink-0 opacity-0 group-hover:opacity-100 transition" :class="getTextColor(p.tags)"/>
+          <!-- Content area - more compact on desktop -->
+          <div class="p-4 md:p-2.5">
+            <h3 class="comic text-xl md:text-base lg:text-lg font-black leading-tight ink">{{ p.title }}</h3>
+
+            <!-- What we built -->
+            <div v-if="p.tags?.length" class="mt-1.5 md:mt-1 flex flex-wrap gap-1">
+              <span v-for="t in p.tags" :key="t"
+                    class="inline-block px-1.5 py-0.5 rounded text-[10px] md:text-[10px] font-medium bg-gray-100 ink/80">
+                {{ t }}
+              </span>
+            </div>
+
+            <!-- View project link -->
+            <div class="mt-2 md:mt-1.5 flex items-center gap-1.5 text-xs md:text-[11px] font-semibold ink group-hover:underline">
+              View project
+              <UIcon name="i-heroicons-arrow-right" class="w-3 h-3 transition group-hover:translate-x-1"/>
             </div>
           </div>
         </div>
@@ -113,13 +102,13 @@ function getCategoryColor(tags?: string[]): string {
 
   const tagStr = tags.join(' ').toLowerCase()
 
-  // Embedded/hardware projects → orange
-  if (tagStr.match(/embedded|hardware|mfd|iot|telemetry|racing/)) {
+  // Hardware/dashboard projects → orange
+  if (tagStr.match(/hardware|dashboard|display|desktop app/)) {
     return 'bg-neo-orange'
   }
 
   // Design/branding projects → purple
-  if (tagStr.match(/design|branding|ui|ux/)) {
+  if (tagStr.match(/design|branding/)) {
     return 'bg-neo-purple'
   }
 

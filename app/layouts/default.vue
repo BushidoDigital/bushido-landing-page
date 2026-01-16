@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
     <Navbar />
-    <main>
+    <main class="flex-1 flex flex-col">
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter v-if="!isHomePage" />
   </div>
 </template>
 
 <script setup lang="ts">
-// Components are auto-registered by Nuxt 3; no explicit import needed for SiteFooter
+const route = useRoute()
+const isHomePage = computed(() => route.path === '/')
 </script>

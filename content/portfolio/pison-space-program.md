@@ -1,49 +1,27 @@
 ---
-title: Pison Space Program — Race Dash MFD
-excerpt: A high‑performance multi‑function display for racing — live telemetry, configurable pages and crisp UI at speed.
+title: Pison Space Program
+excerpt: "A racing dashboard display system — real-time telemetry, customisable layouts and a desktop app to configure it all."
 date: 2025-11-10
 cover: /portfolio/piston.svg
 tags:
-  - embedded
-  - mfd
-  - telemetry
-  - racing
-  - c++
-  - tauri
+  - Dashboard Display
+  - Desktop App
+  - Hardware Integration
 client: Pison
 ---
 
-When milliseconds matter and conditions are extreme, your dashboard needs to be bulletproof. We built a race dash multi-function display system from the ground up — firmware, software, and configuration tools.
+When you're racing, every bit of information matters. The team needed a dashboard system that could display live data clearly, even at high speeds and under vibration.
 
-## Chapter 1: Custom Firmware
+## What we built
 
-We developed **proprietary firmware** specifically for racing MFDs. This isn't off-the-shelf hardware running generic software — this is purpose-built for the track.
+A complete dashboard display system with three parts:
 
-The firmware handles:
-- **Real-time telemetry ingestion** with zero-latency data processing
-- **Robust sensor validation** with intelligent fallbacks when sensors fail
-- **High refresh rate rendering** that stays smooth even under extreme vibration
+**The display itself** — A screen that shows exactly what the driver needs: lap times, speed, gear position, engine data. Everything updates in real-time and stays readable even in bright sunlight or at night.
 
-## Chapter 2: The Widget System
+**Customisable layouts** — Different tracks and conditions need different information. Teams can create custom dashboard pages and switch between them instantly.
 
-At the heart of the display is our **C++ widget framework** — a modular system that gives teams complete flexibility over what they see and how they see it.
+**A desktop app** — No coding required. Teams can design their dashboard layouts visually, preview them, and push updates to the car with one click.
 
-> Build custom dashboard layouts with drag-and-drop widgets. Lap times, gear position, oil pressure, throttle position — configure it exactly how you need it.
+## The outcome
 
-**Key features:**
-- Modular page system with instant switching
-- Persistent settings across sessions
-- Custom theming for different lighting conditions
-- Optimized rendering pipeline for buttery-smooth animations
-
-## Chapter 3: Desktop Configuration
-
-Configuring an MFD shouldn't require a degree in embedded systems. We built a **Tauri-based desktop application** that works on Windows, macOS, and Linux.
-
-**What the app does:**
-- Visual dashboard editor with live preview
-- Widget library with pre-built components
-- Theme customization for glare and night driving
-- One-click deployment to the MFD hardware
-
-The result? Race teams can customize their displays in the garage, test different layouts, and push updates to the car — all without writing a single line of code.
+Race teams can now set up and adjust their dashboards in minutes instead of hours, and drivers get exactly the information they need, exactly how they want it.

@@ -10,6 +10,31 @@
   --neo-purple: #8b5cf6; /* vibrant violet */
   --neo-ink: #05060b; /* deep blackish */
   --paper: #fa00; /* just a placeholder to keep order */
+
+  /* Theme system: playful (default) */
+  --bg-primary: var(--neo-cyan);
+  --bg-card: var(--neo-lime);
+  --bg-cta: var(--neo-magenta);
+  --bg-secondary: var(--neo-orange);
+  --text-primary: #000;
+  --border-primary: #000;
+  --shadow-primary: #000;
+}
+
+/* Professional (boring) theme */
+[data-theme="professional"] {
+  --neo-cyan: #e8edf2;
+  --neo-lime: #ffffff;
+  --neo-magenta: #2c5aa0;
+  --neo-orange: #5b7a9f;
+  --neo-purple: #6b7d94;
+  --bg-primary: #e8edf2;
+  --bg-card: #ffffff;
+  --bg-cta: #2c5aa0;
+  --bg-secondary: #5b7a9f;
+  --text-primary: #1a2332;
+  --border-primary: #404d5e;
+  --shadow-primary: rgba(0,0,0,0.15);
 }
 
 html, body, #__nuxt { height: 100%; }
@@ -17,6 +42,30 @@ body {
   color: #000;
   background: var(--neo-cyan);
   font-family: "Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme transition for all themeable elements */
+.pop-card, .pop-btn, .speech, .service-card {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.08s ease;
+}
+
+/* Also transition footer and social buttons */
+footer > div,
+footer nav a {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s ease;
 }
 
 /* App-level guard: prevent horizontal scroll from decorative shapes
@@ -118,7 +167,7 @@ body {
 }
 
 /* Layout helpers */
-.container { max-width: 1120px; margin-inline: auto; padding-inline: 16px; }
+.container { max-width: 1320px; margin-inline: auto; padding-inline: 16px; }
 
 /* ------------------------------
    Hero speech bubble animations
@@ -156,6 +205,191 @@ body {
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   /* Motion animations are handled in JS; no CSS animations to disable here. */
+  /* Disable theme transitions for reduced motion */
+  body, .pop-card, .pop-btn, .speech, .service-card {
+    transition: none !important;
+  }
+}
+
+/* ------------------------------
+   Professional Theme: Modern & Sleek
+   Complete visual transformation
+   ------------------------------ */
+
+/* Modern soft shadows and refined borders */
+[data-theme="professional"] .pop-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
+              0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+[data-theme="professional"] .pop-btn {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+[data-theme="professional"] .speech {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
+              0 20px 60px -15px rgba(0, 0, 0, 0.15);
+  padding: 1.75rem 2rem;
+}
+
+/* Hide speech bubble tail in professional mode */
+[data-theme="professional"] .speech:before,
+[data-theme="professional"] .speech:after {
+  display: none;
+}
+
+/* Minimal halftone in professional mode */
+[data-theme="professional"] .halftone {
+  opacity: 0.02 !important;
+}
+
+/* Modern service card hover effects */
+[data-theme="professional"] .service-card {
+  border-radius: 16px;
+}
+
+[data-theme="professional"] .service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+              0 20px 50px -10px rgba(44, 90, 160, 0.15);
+}
+
+[data-theme="professional"] .service-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Modern button hover effects - no offset translation */
+[data-theme="professional"] .pop-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.2);
+}
+
+[data-theme="professional"] .pop-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Softer footer styling */
+[data-theme="professional"] footer .bg-white {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
+              0 20px 60px -20px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="professional"] footer .bg-white .halftone {
+  opacity: 0 !important;
+}
+
+/* Hide or soften decorative corner nubs */
+[data-theme="professional"] footer .bg-neo-magenta,
+[data-theme="professional"] footer .bg-neo-lime {
+  opacity: 0.4;
+  border-radius: 50%;
+  border-width: 1px;
+}
+
+/* Refined social icon buttons */
+[data-theme="professional"] footer nav a {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="professional"] footer nav a:hover {
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Update text colors for professional theme */
+[data-theme="professional"] body {
+  color: #1a2332;
+}
+
+[data-theme="professional"] .ink {
+  color: #1a2332;
+}
+
+/* Professional navbar styling */
+[data-theme="professional"] header {
+  border-width: 1px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="professional"] header.scrolled {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
+              0 10px 40px -10px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Mobile menu button professional styling */
+[data-theme="professional"] header button[aria-controls="mobile-menu"] {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile menu panel professional styling */
+[data-theme="professional"] #mobile-menu {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 0 0 16px 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Theme toggle professional styling */
+[data-theme="professional"] .theme-toggle {
+  border: 1px solid rgba(44, 90, 160, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(44, 90, 160, 0.1);
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Soften floating shapes in professional mode */
+[data-theme="professional"] svg[aria-hidden="true"] {
+  opacity: 0.15;
+  filter: saturate(0.3);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transition for header elements */
+header {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header button {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s ease;
+}
+
+#mobile-menu {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---------------------------------
@@ -173,6 +407,16 @@ body {
 .page-leave-to {
   opacity: 0;
   transform: translateY(-8px);
+}
+
+/* Fade transition for contact page */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -11,7 +11,8 @@ export default defineContentConfig({
                 date: z.string().or(z.date()).optional(),
                 cover: z.string().optional(),
                 tags: z.array(z.string()).optional(),
-                client: z.string().optional()
+                client: z.string().optional(),
+                screenshots: z.array(z.string()).optional()
             })
         })
     }
