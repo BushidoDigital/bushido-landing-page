@@ -1,12 +1,13 @@
-// Early theme initialization to prevent flash of wrong theme
+// Client-side theme initialization - ensures theme stays in sync after hydration
 export default defineNuxtPlugin(() => {
-  // Read theme from cookie before Vue hydration
   const themeCookie = useCookie<'playful' | 'serious'>('bushido-theme', {
     default: () => 'playful'
   })
 
-  // Apply theme immediately to prevent flash
-  if (import.meta.client) {
-    document.documentElement.setAttribute('data-theme', themeCookie.value || 'playful')
-  }
+  // Sync theme attribute with cookie value (server should have already set it)
+  useHead({
+    htmlAttrs: {
+      'data-theme': themeCookie.value || 'playful'
+    }
+  })
 })

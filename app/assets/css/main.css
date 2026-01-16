@@ -505,6 +505,14 @@ header button {
   box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Icon containers in contact cards - neutral gray in serious mode */
+[data-theme="serious"] .contact-card .bg-neo-magenta,
+[data-theme="serious"] .contact-card .bg-neo-orange,
+[data-theme="serious"] .contact-card .bg-neo-lime {
+  background: #f1f5f9 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
 /* Portfolio card in serious mode */
 [data-theme="serious"] .portfolio-card .pop-card {
   background: var(--glass-bg);
